@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIVI YOGA | Личный кабинет</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pangolin', cursive;
+            line-height: 1.6;
+            color: #333;
+            background: #F5FFFA;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        :root {
+            --kiwi-green: #8db600;
+            --kiwi-dark: #6d8f00;
+            --kiwi-light: #e8f5c4;
+            --blue-light: #F5FFFA;
+            --shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        /* Шапка */
+        header {
+            background: rgba(245, 255, 250, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--kiwi-green);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+        
+        nav li {
+            margin-left: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+        
+        nav a:hover {
+            color: var(--kiwi-green);
+        }
+        
+        .account-btn {
+            display: inline-block;
+            background: var(--kiwi-green);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+            font-size: 15px;
+            margin-left: 25px;
+            white-space: nowrap;
+        }
+        
+        .account-btn:hover {
+            background: var(--kiwi-dark);
+        }
+        
+        /* Основной контент */
+        main {
+            flex: 1;
+            padding-top: 80px;
+        }
+        
+        .auth-section {
+            background: var(--blue-light);
+            position: relative;
+            padding: 100px 5% 80px;
+        }
+        
+        .auth-container {
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            position: relative;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--kiwi-light);
+        }
+        
+        .auth-tab {
+            padding: 12px 25px;
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+            color: #666;
+        }
+        
+        .auth-tab.active {
+            color: var(--kiwi-green);
+            font-weight: 600;
+        }
+        
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--kiwi-green);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Pangolin', cursive;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--kiwi-green);
+            outline: none;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--kiwi-green);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Pangolin', cursive;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        .auth-btn:hover {
+            background: var(--kiwi-dark);
+        }
+        
+        .auth-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .auth-link {
+            color: var(--kiwi-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .social-auth {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .social-title {
+            margin-bottom: 15px;
+            color: #666;
+            position: relative;
+        }
+        
+        .social-title::before,
+        .social-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: #ddd;
+        }
+        
+        .social-title::before {
+            left: 0;
+        }
+        
+        .social-title::after {
+            right: 0;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .btn-google {
+            background: #DB4437;
+        }
+        
+        .btn-facebook {
+            background: #4267B2;
+        }
+        
+        .btn-vk {
+            background: #4C75A3;
+        }
+        
+        /* Подвал */
+        footer {
+            background: var(--kiwi-green);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 24px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            font-size: 14px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Адаптация для мобильных */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 5%;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: white;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                z-index: 99;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            nav li {
+                margin: 15px 0;
+            }
+            
+            .account-btn {
+                margin: 20px 0 0 0;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+            
+            .auth-section {
+                padding: 60px 5% 50px;
+            }
+            
+            .auth-container {
+                padding: 20px;
+            }
+            
+            .auth-tab {
+                padding: 10px 15px;
+                font-size: 18px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+            }
+            
+            .footer-links a {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="logo">KIVI YOGA</div>
+        <div class="menu-toggle">☰</div>
+        <nav>
+            <div class="nav-container">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="index.html#about">Обо мне</a></li>
+                    <li><a href="index.html#services">Направления</a></li>
+                    <li><a href="index.html#online">Онлайн</a></li>
+                    <li><a href="index.html#schedule">Расписание</a></li>
+                    <li><a href="index.html#subscriptions">Абонементы</a></li>
+                    <li><a href="index.html#contacts">Контакты</a></li>
+                </ul>
+                <a href="account.html" class="account-btn">Личный кабинет</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <section class="auth-section">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">Вход</div>
+                    <div class="auth-tab" data-tab="register">Регистрация</div>
+                </div>
+                
+                <!-- Форма входа -->
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" class="form-control" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">Войти</button>
+                    
+                    <div class="auth-footer">
+                        <a href="#" class="auth-link">Забыли пароль?</a>
+                    </div>
+                    
+                    <div class="social-auth">
+                        <div class="social-title">Или войдите через</div>
+                        <div class="social-buttons">
+                            <a href="#" class="social-btn btn-google"><i class="fab fa-google"></i></a>
+                            <a href="#" class="social-btn btn-facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-btn btn-vk"><i class="fab fa-vk"></i></a>
+                        </div>
+                    </div>
+                </form>
+                
+                <!-- Форма регистрации -->
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="register-name">Имя</label>
+                        <input type="text" id="register-name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">Пароль</label>
+                        <input type="password" id="register-password" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-confirm">Подтвердите пароль</label>
+                        <input type="password" id="register-confirm" class="form-control" required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">Зарегистрироваться</button>
+                    
+                    <div class="auth-footer">
+                        Уже есть аккаунт? <a href="#" class="auth-link switch-to-login">Войти</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-logo">KIVI YOGA</div>
+        <div class="footer-links">
+            <a href="#">Политика конфиденциальности</a>
+            <a href="#">Договор-оферта</a>
+            <a href="#">Вакансии</a>
+        </div>
+        <div class="social-links">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="ВКонтакте"><i class="fab fa-vk"></i></a>
+            <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
+        <div class="copyright">
+            © 2025 KIVI YOGA. Все права защищены.
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Переключение между вкладками
+        const tabs = document.querySelectorAll('.auth-tab');
+        const forms = document.querySelectorAll('.auth-form');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                forms.forEach(f => f.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.tab}-form`).classList.add('active');
+            });
+        });
+        
+        // Переключение на форму входа из формы регистрации
+        document.querySelector('.switch-to-login').addEventListener('click', (e) => {
+            e.preventDefault();
+            tabs.forEach(t => t.classList.remove('active'));
+            forms.forEach(f => f.classList.remove('active'));
+            
+            document.querySelector('.auth-tab[data-tab="login"]').classList.add('active');
+            document.getElementById('login-form').classList.add('active');
+        });
+        
+        // Обработка форм
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Здесь код для входа
+            alert('Вход выполнен!');
+        });
+        
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Здесь код для регистрации
+            alert('Регистрация успешна!');
+        });
+    </script>
+</body>
+</html>

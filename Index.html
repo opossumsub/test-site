@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIVI YOGA | Студия йоги</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset и базовые стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Pangolin', cursive;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        /* Цветовая схема */
+        :root {
+            --kiwi-green: #8db600; /* Теплый зеленый цвет мякоти киви */
+            --kiwi-dark: #6d8f00; /* Темный оттенок для hover */
+            --kiwi-light: #e8f5c4; /* Светлый оттенок для фона */
+            --blue-light: #F5FFFA; /* Светлый голубой оттенок для фона */				
+        }
+        
+        /* Шапка */
+        header {
+            background: rgba(245, 255, 250, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--kiwi-green);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        /* Мобильное меню */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+        
+        nav a:hover {
+            color: var(--kiwi-green);
+        }
+        
+        /* Герой-секция */
+        .hero {
+            height: 100vh;
+            background: url('main.jpg') no-repeat center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .hero p {
+            font-size: clamp(16px, 2.5vw, 20px);
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--kiwi-green);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background: var(--kiwi-dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--kiwi-green);
+            color: var(--kiwi-green);
+        }
+        
+        .btn-outline:hover {
+            background: var(--kiwi-green);
+            color: white;
+        }
+        
+
+        /* Общие стили для всех секций */
+       .section {
+           position: relative;
+           padding: 100px 5%;
+           text-align: center;
+           z-index: 1;
+        }
+
+       /* Стандартные секции (светло-голубой фон) */
+       .section:not(.online-classes):not(.subscriptions) {
+           background: var(--blue-light);
+        }
+
+       /* Секция онлайн-занятий (зеленоватый фон) */
+       .online-classes {
+          background: var(--kiwi-light);
+        }
+
+       /* Секция абонементов (такой же фон как у онлайн) */
+       .subscriptions {
+          background: var(--kiwi-light);
+        }
+        
+        .section-title {
+            font-size: clamp(28px, 4vw, 36px);
+            margin-bottom: 50px;
+            color: var(--kiwi-green);
+            position: relative;
+            display: inline-block;
+            font-weight: 600;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--kiwi-green);
+        }
+        
+        /* Обо мне */
+        .about {
+            background: var(--blue-light);
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Направления */
+        .services-grid {
+	    display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .service-info {
+            padding: 25px;
+            text-align: left;
+        }
+        
+        .service-info h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--kiwi-green);
+            font-weight: 600;
+        }
+        
+        .service-info p {
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .learn-more {
+            display: inline-block;
+            color: var(--kiwi-green);
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        
+        .learn-more:hover {
+            color: #333;
+        }
+        
+        /* Онлайн-занятия */
+        .online-classes {
+            background: var(--kiwi-light);
+        }
+        
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .class-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .class-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .class-video {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .class-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .class-info {
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .class-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .class-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .class-price {
+            font-weight: bold;
+            color: var(--kiwi-green);
+            font-size: 18px;
+        }
+        
+        .access-btn {
+            display: inline-block;
+            background: var(--kiwi-green);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .access-btn:hover {
+            background: var(--kiwi-dark);
+        }
+        
+        .more-classes {
+            margin-top: 40px;
+        }
+        
+        /* Абонементы */
+        .subscriptions {
+            background: var(--kiwi-light);
+        }
+        
+        .subscriptions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .subscription-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .subscription-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .subscription-card h3 {
+            font-size: 22px;
+            color: var(--kiwi-green);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .subscription-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .subscription-desc {
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .buy-btn {
+            display: inline-block;
+            background: var(--kiwi-green);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .buy-btn:hover {
+            background: var(--kiwi-dark);
+        }
+        
+        /* Модальные окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            margin: 50px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: modalFade 0.3s;
+        }
+        
+        @keyframes modalFade {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .modal-header {
+            position: relative;
+        }
+        
+        .modal-header img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .modal-body h2 {
+            color: var(--kiwi-green);
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .modal-body h3 {
+            margin: 25px 0 15px;
+            color: var(--kiwi-green);
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .modal-body ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-body li {
+            margin-bottom: 8px;
+        }
+        
+        /* Расписание */
+        .schedule-table {
+            max-width: 800px;
+            margin: 0 auto;
+            background: --blue-light;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+     
+	/* Стили для секции контактов */
+	.contacts-container {
+   	    display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+       .contacts-info {
+           flex: 1;
+           min-width: 300px;
+           background: var(--blue-light);
+           padding: 30px;
+           border-radius: 10px;
+           box-shadow: var(--shadow);
+       }
+
+	.contacts-info p {
+           margin-bottom: 20px;
+           font-size: 18px;
+           display: flex;
+           align-items: center;
+           gap: 10px;
+        }
+
+	.map-container {
+           flex: 1;
+           min-width: 300px;
+           border-radius: 10px;
+           overflow: hidden;
+           box-shadow: var(--shadow);
+        }
+
+	/* Адаптивность */
+	@media (max-width: 768px) {
+    	.contacts-container {
+           flex-direction: column;
+        }
+    
+    	.contacts-info, .map-container {
+           width: 100%;
+        }
+}
+
+/* Стили для карты */
+.map-container {
+    flex: 1;
+    min-width: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 400px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .map-container {
+        height: 300px;
+    }
+}
+
+   
+        /* Подвал */
+        footer {
+            background: var(--kiwi-green);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 15px;
+            font-size: 24px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            font-size: 14px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 5%;
+            }
+            
+            .menu-toggle {
+                display: block;
+                font-size: 24px;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: white;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                transition: left 0.3s;
+                z-index: 99;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav li {
+                margin: 15px 0;
+            }
+            
+            .hero-content {
+                padding-top: 40px;
+            }
+            
+            .modal-content {
+                margin: 20px auto;
+            }
+            
+            .modal-header img {
+                height: 200px;
+            }
+            
+            .subscriptions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+    <div class="logo">KIVI YOGA</div>
+    <div class="menu-toggle">☰</div>
+    <nav>
+        <div class="nav-container">
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#about">Обо мне</a></li>
+                <li><a href="#services">Направления</a></li>
+                <li><a href="#online">Онлайн</a></li>
+                <li><a href="#schedule">Расписание</a></li>
+                <li><a href="#subscriptions">Абонементы</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+            <a href="account.html" class="account-btn">Личный кабинет</a>
+        </div>
+    </nav>
+</header>
+
+<style>
+    /* Общие стили для навигации */
+    nav {
+        display: flex;
+        align-items: center;
+    }
+    
+    .nav-container {
+        display: flex;
+        align-items: center;
+    }
+    
+    nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+    }
+    
+    nav li {
+        margin-left: 25px;
+    }
+    
+    nav a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+        font-size: 15px;
+    }
+    
+    /* Стили для кнопки личного кабинета */
+    .account-btn {
+        display: inline-block;
+        background: var(--kiwi-green);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.3s;
+        font-size: 15px;
+        margin-left: 25px;
+        white-space: nowrap;
+    }
+    
+    .account-btn:hover {
+        background: var(--kiwi-dark);
+    }
+    
+    /* Адаптация для мобильных */
+    @media (max-width: 768px) {
+        .nav-container {
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+        
+        nav ul {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        nav li {
+            margin: 10px 0;
+        }
+        
+        .account-btn {
+            margin: 15px 0 0 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+        }
+    }
+</style>
+
+    <!-- Герой-секция -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Йога — это очень увлекательный путь к себе!</h1>
+            <p>Приходите на мои занятия или присоединяйтесь онлайн, чтобы встать на этот путь!</p>
+            <a href="https://wa.me/79139569897?text=Здравствуйте,%20Ольга!%20Я%20хочу%20записаться%20к%20вам%20на%20занятие" class="btn">Записаться на занятие</a>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section id="about" class="section">
+        <h2 class="section-title">Обо мне</h2>
+        <div class="about-content">
+            <div class="about-text">
+		<style>
+  		p {
+    		margin-top: 10px; /* Отступ сверху */
+    		margin-bottom: 10px; /* Отступ снизу */
+  		}
+		</style>
+
+                <p style="text-align: justify;">Меня зовут Киви Ольга. Киви это не творческий псевдоним, а настоящая фамилия, которую мне подарил мой папа и на данном этапе жизни она мне чрезвычайно дорога, как память о нем.</p>
+		<p style="text-align: justify;">Значение слова киви - камень, но я с юмором и иронией отношусь к тому, что для кого-то это прежде всего фрукт или маленькая птичка. Я сама люблю и фрукт киви, и к птичкам отношусь с большой симпатией.</p>
+		<p style="text-align: justify;">У слова йога также есть разные значения, но я оставлю в стороне многозначительность термина йога и поделюсь тем, что люди получают, занимаясь йогой со мной.</p>
+		<p style="text-align: justify;">Кто-то чувствует забытое ощущение безопасности, умиротворения и спокойной тишины ума. Кто-то расстается с эмоциональным напряжением. А кто-то вновь узнает физические возможности своего тела - силу и гибкость, о которой и не подозревал.</p>
+                <p style="text-align: justify;">Но главное, очень разные и непохожие друг на друга люди непременно улыбаются в конце нашего занятия. И я тоже люблю улыбаться.</p>
+		<p style="text-align: justify;">Я не обещаю никому чудес, но с уверенностью скажу, что каждому доступны вдохновляющие и вызывающие восторг победы и достижения, если вы позволите мне показать вам ваши возможности. Жду вас на своих занятиях!</p>
+            </div>
+            <div class="about-image">
+                <img src="About me.jpg" alt="Инструктор йоги">
+            </div>
+        </div>
+    </section>
+
+    <!-- Направления -->
+    <section id="services" class="section">
+        <h2 class="section-title">Направления</h2>
+        <div class="services-grid">
+            <!-- Хатха-йога -->
+            <div class="service-card" onclick="openModal('hatha')">
+                <img src="Hatha.jpg" alt="Хатха-йога">
+                <div class="service-info">
+                    <h3>Хатха-йога</h3>
+                    <p>Классическая практика асан для гармоничного развития.</p>
+                    <span class="learn-more">Подробнее →</span>
+                </div>
+            </div>
+            
+            <!-- Йога в гамаках -->
+            <div class="service-card" onclick="openModal('gammak')">
+                <img src="Fly yoga.jpg" alt="Йога в гамаках">
+                <div class="service-info">
+                    <h3>Йога в гамаках</h3>
+                    <p>Антигравитационная практика, развивающая тело с использованием гамаков.</p>
+                    <span class="learn-more">Подробнее →</span>
+                </div>
+            </div>
+            
+            <!-- Йога для беременных -->
+            <div class="service-card" onclick="openModal('pregnant')">
+                <img src="Pregnant.jpg" alt="Йога для беременных">
+                <div class="service-info">
+                    <h3>Йога для беременных</h3>
+                    <p>Практика с заботой и вниманием к будущим мамам, помогающая подготовиться к родам.</p>
+                    <span class="learn-more">Подробнее →</span>
+                </div>
+            </div>
+            
+            <!-- Растяжка -->
+            <div class="service-card" onclick="openModal('stretching')">
+                <img src="Stretching.jpg" alt="Растяжка">
+                <div class="service-info">
+                    <h3>Растяжка</h3>
+                    <p>Практика на развитие гибкости тела и устранение мышечного напряжения и стресса.</p>
+                    <span class="learn-more">Подробнее →</span>
+                </div>
+            </div>
+            
+            <!-- Йогатерапия -->
+            <div class="service-card" onclick="openModal('therapy')">
+                <img src="Yogatherapy.jpg" alt="Йогатерапия">
+                <div class="service-info">
+                    <h3>Йогатерапия</h3>
+                    <p>Индивидуальная практика для восстановления здоровья при наличии заболеваний.</p>
+                    <span class="learn-more">Подробнее →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Онлайн-занятия с вкладками -->
+<section id="online" class="section online-classes">
+    <h2 class="section-title">Онлайн</h2>
+    
+<!-- Добавленное сообщение о разработке -->
+    <div style="max-width: 800px; margin: 0 auto 40px; padding: 20px; background: --kivi-light; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+        <p style="text-align: center; font-size: 18px; color: var(--kiwi-green);">
+            <i class="fas fa-tools" style="font-size: 24px; margin-bottom: 10px; display: block;"></i>
+            Этот раздел находится в стадии разработки и наполнения.<br>
+            Скоро здесь появятся онлайн-занятия и курсы!
+        </p>
+    </div>
+
+    <div class="tabs-container">
+        <!-- Переключатели вкладок -->
+        <div class="tabs-header">
+            <button class="tab-button active" data-tab="yoga">Йога онлайн</button>
+            <button class="tab-button" data-tab="courses">Курсы</button>
+        </div>
+        
+        <!-- Контент вкладок -->
+        <div class="tabs-content">
+            <!-- Вкладка "Йога онлайн" -->
+            <div id="tab-yoga" class="tab-pane active">
+                <div class="classes-grid" id="yoga-videos-container">
+                    <!-- Видео будут загружены скриптом -->
+                    <div class="loader">Загрузка видео...</div>
+                </div>
+                <div class="more-classes">
+                    <a href="online-classes.html" class="btn btn-outline">Все онлайн-занятия</a>
+                </div>
+            </div>
+            
+            <!-- Вкладка "Курсы" -->
+            <div id="tab-courses" class="tab-pane">
+                <div class="courses-grid" id="courses-container">
+                    <!-- Курсы будут загружены скриптом -->
+                    <div class="loader">Загрузка курсов...</div>
+                </div>
+                <div class="more-classes">
+                    <a href="courses.html" class="btn btn-outline">Все курсы</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+      /* Стили для вкладок с раздельными линиями */
+    .tabs-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .tabs-header {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px; /* Увеличил отступ снизу */
+    }
+    
+    .tab-button {
+        background: none;
+        border: none;
+        padding: 12px 30px; /* Увеличил padding */
+        font-size: 28px; /* Размер как у заголовка секции */
+        font-weight: 600;
+        color: #666;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s ease;
+        font-family: 'Pangolin', cursive;
+        margin: 0 20px;
+    }
+    
+    .tab-button.active {
+        color: var(--kiwi-green);
+    }
+    
+    /* Основная линия под каждой вкладкой */
+    .tab-button::after {
+        content: '';
+        position: absolute;
+        bottom: -8px; /* Опустил линию ниже */
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--kiwi-light);
+        transition: all 0.3s ease;
+    }
+    
+    /* Активная линия поверх основной */
+    .tab-button.active::before {
+        content: '';
+        position: absolute;
+        bottom: -8px; /* Такое же положение как у ::after */
+        left: 0;
+        width: 100%;
+        height: 3px; /* Толще основной линии */
+        background: var(--kiwi-green);
+        z-index: 2;
+    }
+    
+    .tab-button:hover:not(.active) {
+        color: var(--kiwi-dark);
+    }
+    
+    .tab-pane {
+        display: none;
+    }
+    
+    .tab-pane.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Стили для сетки курсов */
+    .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .course-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s;
+    }
+    
+    .course-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .course-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .course-info {
+        padding: 20px;
+    }
+    
+    /* Индикаторы загрузки */
+    .loader, .error {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 20px;
+        font-size: 18px;
+        color: var(--kiwi-green);
+    }
+    
+    .error {
+        color: #e74c3c;
+    }
+</style>
+
+<script>
+    // Функция для получения случайных элементов из массива
+    function getRandomItems(array, count) {
+        const shuffled = [...array].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    }
+
+    // Функция для загрузки данных с сервера
+    async function fetchData(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Ошибка загрузки данных');
+            return await response.json();
+        } catch (error) {
+            console.error('Ошибка:', error);
+            return null;
+        }
+    }
+
+    // Функция для отображения видео
+    async function renderYogaVideos() {
+        const container = document.getElementById('yoga-videos-container');
+        container.innerHTML = '<div class="loader">Загрузка видео...</div>';
+        
+        const data = await fetchData('data/yoga-videos.json');
+        if (!data) {
+            container.innerHTML = '<div class="error">Не удалось загрузить видео</div>';
+            return;
+        }
+        
+        const randomVideos = getRandomItems(data, 3);
+        
+        container.innerHTML = randomVideos.map(video => `
+            <div class="class-card">
+                <div class="class-video">
+                    <iframe src="https://www.youtube.com/embed/${video.id}" allowfullscreen></iframe>
+                </div>
+                <div class="class-info">
+                    <h3>${video.title}</h3>
+                    <div class="class-meta">
+                        <span>${video.duration}</span>
+                        <span>${video.level}</span>
+                    </div>
+                    <p>${video.description}</p>
+                    <div class="class-price">${video.price}</div>
+                    <a href="#" class="access-btn">${video.price === "Бесплатно" ? "Смотреть" : "Купить доступ"}</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Функция для отображения курсов
+    async function renderCourses() {
+        const container = document.getElementById('courses-container');
+        container.innerHTML = '<div class="loader">Загрузка курсов...</div>';
+        
+        const data = await fetchData('data/courses.json');
+        if (!data) {
+            container.innerHTML = '<div class="error">Не удалось загрузить курсы</div>';
+            return;
+        }
+        
+        const randomCourses = getRandomItems(data, 3);
+        
+        container.innerHTML = randomCourses.map(course => `
+            <div class="course-card">
+                <img src="${course.image}" alt="${course.title}" loading="lazy">
+                <div class="course-info">
+                    <h3>${course.title}</h3>
+                    <div class="course-meta">
+                        <span>${course.lessons}</span>
+                        <span>${course.level}</span>
+                    </div>
+                    <p>${course.description}</p>
+                    <div class="course-price">${course.price}</div>
+                    <a href="#" class="access-btn">Подробнее</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        renderYogaVideos();
+        renderCourses();
+        
+        // Обработчики для кнопок вкладок
+        const tabButtons = document.querySelectorAll('.tab-button');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Убираем активные классы
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.tab-pane').forEach(pane => {
+                    pane.classList.remove('active');
+                });
+                
+                // Добавляем активные классы
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(`tab-${tabId}`).classList.add('active');
+            });
+        });
+    });
+</script>
+
+    <!-- Расписание -->
+    <section id="schedule" class="section">
+        <h2 class="section-title">Расписание</h2>
+        <div class="schedule-table">
+            <p>Расписание обновляется еженедельно. Следите за изменениями в наших соцсетях.</p>
+            <!-- Здесь будет таблица расписания -->
+        </div>
+    </section>
+
+    <!-- Абонементы -->
+    <section id="subscriptions" class="section subscriptions">
+        <h2 class="section-title">Абонементы</h2>
+        <div class="subscriptions-grid">
+            <div class="subscription-card">
+                <h3>Разовое занятие</h3>
+                <div class="subscription-price">1 000 ₽</div>
+                <p class="subscription-desc">Подходит тем, кто еще не определился c абонементом</p>
+                <a href="https://wa.me/79139569897?text=Здравствуйте,%20Ольга!%20Я%20хочу%20записаться%20к%20вам%20на%20занятие" class="buy-btn">Записаться на занятие</a>
+            </div>
+            
+             <div class="subscription-card">
+                <h3>4 занятия</h3>
+                <div class="subscription-price">3 000 ₽</div>
+                <p class="subscription-desc">Идеально для тех, кто только начинает знакомство с йогой</p>
+                <a href="https://wa.me/79139569897?text=Здравствуйте,%20Ольга!%20Я%20хочу%20записаться%20к%20вам%20на%20занятие" class="buy-btn">Записаться на занятие</a>
+            </div>
+
+            <div class="subscription-card">
+                <h3>8 занятий</h3>
+                <div class="subscription-price">6 000 ₽</div>
+                <p class="subscription-desc">Отличный вариант для мотивации на регулярную практику 2 раза в неделю</p>
+                <a href="https://wa.me/79139569897?text=Здравствуйте,%20Ольга!%20Я%20хочу%20записаться%20к%20вам%20на%20занятие" class="buy-btn">Записаться на занятие</a>
+            </div>
+            
+            <div class="subscription-card">
+                <h3>Индивидуальное занятие</h3>
+                <div class="subscription-price">от 4 000 ₽</div>
+                <p class="subscription-desc">Персональный подход с учетом ваших целей и возможностей</p>
+                <a href="https://wa.me/79139569897?text=Здравствуйте,%20Ольга!%20Я%20хочу%20записаться%20к%20вам%20на%20занятие" class="buy-btn">Записаться на занятие</a>
+            </div>
+        </div>
+    </section>
+
+    	<!-- Контакты -->
+	<section id="contacts" class="section">
+    <h2 class="section-title">Контакты</h2>
+    <div class="contacts-container">
+        <div class="contacts-info">
+            <p><i class="fas fa-map-marker-alt"></i> г. Бердск, ул. Полевая, 11</p>
+            <p><i class="fas fa-phone"></i> +7 (913) 956-98-97</p>
+            <p><i class="fas fa-envelope"></i> kiviolga@gmail.com</p>
+            
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="ВКонтакте"><i class="fab fa-vk"></i></a>
+                <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+        
+	<div class="map-container">
+    	<iframe 
+        src="https://yandex.ru/map-widget/v1/?ll=83.101269%2C54.743291&z=16&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NjUyMTY0MhJI0KDQvtGB0YHQuNGPLCDQndC-0LLQvtGB0LjQsdC40YDRgdC60LjQuSDQutCw0LzQsdC40L3Qs9CwLCDQkdC10YHQvdCw0Y8g0YPQu9C40YbQsCwgMTEiCg3XThVCFY4nOUI%2C&z=16" 
+        width="100%" 
+        height="300" 
+        frameborder="0" 
+        style="border:0; border-radius:8px;"
+        allowfullscreen>
+    	</iframe>
+	</div>
+</section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-logo">KIVI YOGA</div>
+        <div class="footer-links">
+            <a href="#">Политика конфиденциальности</a>
+            <a href="#">Договор-оферта</a>
+            <a href="#">Вакансии</a>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-vk"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+        </div>
+        <div class="copyright">
+            © 2025 KIVI YOGA. Все права защищены.
+        </div>
+    </footer>
+
+    <!-- Модальные окна с описанием направлений -->
+    <div id="hatha" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="Hatha.jpg" alt="Хатха-йога">
+                <div class="close-modal" onclick="closeModal()">×</div>
+            </div>
+            <div class="modal-body">
+                <h2>Хатха-йога</h2>
+                <p>Классическая практика йоги, объединяющая физические позы и упражнения (асаны и виньясы), дыхательные техники (пранаямы и пранавьяямы) и техники медитации. Подходит для всех уровней подготовки.</p>
+                
+                <h3>Преимущества:</h3>
+                <ul>
+                    <li>Развитие мышц и повышение гибкости</li>
+		    <li>Формирование здоровой и красивой осанки</li>
+                    <li>Улучшение работы внутренних органов</li>
+                    <li>Снижение стресса и тревожности</li>
+                    <li>Развитие концентрации, внимания и осознанности</li>
+                </ul>
+                
+                <h3>Рекомендации:</h3>
+                <p>Занятия подходят для любого уровня подготовки. Приходите на занятие в удобной одежде. Не ешьте за 1.5-2 часа занятия.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="gammak" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="Fly yoga.jpg" alt="Йога в гамаках">
+                <div class="close-modal" onclick="closeModal()">×</div>
+            </div>
+            <div class="modal-body">
+                <h2>Йога в гамаках</h2>
+                <p>Антигравитационная практика, использующая специальные гамаки для поддержки тела. Позволяет выполнять сложные асаны, снижая нагрузку на опорно-двигательный аппарат.</p>
+                
+                <h3>Преимущества:</h3>
+                <ul>
+                    <li>Глубокая разгрузка позвоночника</li>
+                    <li>Улучшение венозного кровообращения и лимфотока</li>
+                    <li>Развитие координации и удержания равновесия</li>
+                </ul>
+                
+                <h3>Рекомендации:</h3>
+                <p>Занятия подходят для любого уровня подготовки. Приходите на занятие в удобной одежде. Не ешьте за 1.5-2 часа занятия.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="pregnant" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="Pregnant.jpg" alt="Йога для беременных">
+                <div class="close-modal" onclick="closeModal()">×</div>
+            </div>
+            <div class="modal-body">
+                <h2>Йога для беременных</h2>
+                <p>Специально адаптированные практики для будущих мам во время беременности. Помогают подготовить тело к родам и восстановиться после них.</p>
+                
+                <h3>Преимущества:</h3>
+                <ul>
+                    <li>Сбалансированная работа с мышцами тазового дна</li>
+                    <li>Облегчение болей в спине</li>
+                    <li>Обучение правильному дыханию</li>
+                    <li>Снижение тревожности, стресса и мышечного тонуса</li>
+                    <li>Снижение отеков и улучшение сна</li>
+                </ul>
+                
+                <h3>Рекомендации:</h3>
+                <p>Начинать занятия допустимо после 12 недель беременности при отсутствии противопоказаний. Перед посещением первого занятия проконсультируйтесь с врачом.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="stretching" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="Stretching.jpg" alt="Растяжка">
+                <div class="close-modal" onclick="closeModal()">×</div>
+            </div>
+            <div class="modal-body">
+                <h2>Растяжка</h2>
+                <p>Практика, направленная на развитие гибкости и навыка глубокого расслабления.</p>
+                
+                <h3>Преимущества:</h3>
+                <ul>
+                    <li>Снижение мышечного напряжения и стресса</li>
+                    <li>Профилактика травм при физических нагрузках</li>
+                    <li>Улучшение подвижности суставов</li>
+                    <li>Улучшение кровообращения</li>
+                </ul>
+                
+                <h3>Рекомендации:</h3>
+                <p>Занятия подходят для любого уровня подготовки. Приходите на занятие в удобной одежде. Не ешьте за 1.5-2 часа занятия. На занятиях упражнения выполняйте плавно, без резких движений и боли при растяжении.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="therapy" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="Yogatherapy.jpg" alt="Йогатерапия">
+                <div class="close-modal" onclick="closeModal()">×</div>
+            </div>
+            <div class="modal-body">
+                <h2>Йогатерапия</h2>
+                <p>Восстановительно-оздоровительное направление йоги, адаптированное под индивидуальные особенности и состояние здоровья.</p>
+                
+                <h3>Показания:</h3>
+                <ul>
+                    <li>Проблемы с позвоночником в области поясницы, груди, шеи (остеохондроз, сколиоз, протрузии, грыжи)</li>
+                    <li>Дегенеративные заболевания суставов (артрозы суставов)</li>
+                    <li>Реабилитация после травм (переломы, вывихи, нестабильность, надрывы, разрывы)</li>
+                    <li>Головные боли</li>
+		    <li>Проблемы с ЖКТ (боли в области живота, связанные с нарушениями функций ЖКТ, синдром раздраженного кишечника, запоры)</li>
+		    <li>Проблемы дыхательной системы (снижение жизненной емкости легких, последствия респираторных заболеваний, ХОБЛ)</li>
+		    <li>Проблемы сосудистой системы (нарушение венозного оттока, снижение эластичности сосудов)</li>
+                </ul>
+                
+                <h3>Особенности:</h3>
+                <p>Занятия проводятся индивидуально после консультации с инструктором.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Мобильное меню
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Плавный скролл
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                document.querySelector('nav').classList.remove('active');
+            });
+        });
+        
+           // Модальные окна
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Закрытие при клике вне контента
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
